@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AppointmentScheduleITIX.Model;
 using AppointmentScheduleITIX.Repository;
 
@@ -26,9 +24,9 @@ namespace AppointmentScheduleITIX.Business.Implementations
             _repository.Delete(id);
         }
 
-        public bool Exists(long id)
+        public bool ExistsDate(DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim)
         {
-            return _repository.Exists(id);
+            return _repository.ExistsDate(dataInicio, horaInicio, horaFim);
         }
 
         public List<Patient> FindAll()

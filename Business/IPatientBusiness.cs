@@ -15,6 +15,6 @@ namespace AppointmentScheduleITIX.Business
         void Delete(long id);
         IEnumerable<Patient> FindByName(string name);
 
-        bool Exists(long id);
+        bool ExistsDate(DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim);
     }
 }

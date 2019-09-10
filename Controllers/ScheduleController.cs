@@ -24,8 +24,21 @@ namespace AppointmentScheduleITIX.Controllers
         [HttpPost("createpatient")]
         public async Task<IActionResult> CreatePatient([FromBody] Patient patient)
         {
+            if(patient.HoraFim < patient.HoraInicio)
+            {
+                return BadRequest("Horário inválido");
+            }
             if (patient == null) return BadRequest("model is null");
+
+            if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
+            {
             return await Task.FromResult(new OkObjectResult(_patientBusiness.Create(patient)));
+
+            }
+            else
+            {
+                return BadRequest("Já existe uma consulta nesse mesmo horário");
+            }
         }
 
         [HttpGet("getall")]
@@ -49,8 +62,20 @@ namespace AppointmentScheduleITIX.Controllers
         [HttpPut("updatepatient")]
         public async Task<IActionResult> UpdatePatient([FromBody] Patient patient)
         {
+            if (patient.HoraFim > patient.HoraInicio)
+            {
+                return BadRequest("Horário inválido");
+            }
             if (patient == null) return BadRequest("model is null");
-            return await Task.FromResult(new OkObjectResult(_patientBusiness.Update(patient)));
+
+            if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
+            {
+                return await Task.FromResult(new OkObjectResult(_patientBusiness.Update(patient)));
+            }
+            else
+            {
+                return BadRequest("Já existe uma consulta nesse mesmo horário");
+            }
         }
 
         [HttpDelete("deletepatient/{id}")]

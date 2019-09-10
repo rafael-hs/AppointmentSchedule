@@ -9,6 +9,6 @@ namespace AppointmentScheduleITIX.Model.Base
     public class BaseEntity
     {
         [Column("id")]
-        public long? Id { get; set; }
+        public int Id { get; set; }
     }
 }

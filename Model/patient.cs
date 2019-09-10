@@ -9,12 +9,19 @@ namespace AppointmentScheduleITIX.Model
     {
         [Column("nome")]
         public string Nome { get; set; }
+
         [Column("data_nascimento")]
         public DateTime DataNascimento { get; set; }
-        [Column("data_inic_consulta")]
-        public DateTime InicioConsulta { get; set; }
-        [Column("data_fin_consulta")]
-        public DateTime FinalConsulta { get; set; }
+
+        [Column("hora_inicio")]
+        public TimeSpan HoraInicio { get; set; }
+
+        [Column("hora_fim")]
+        public TimeSpan HoraFim { get; set; }
+
+        [Column("data_consulta")]
+        public DateTime DataConsulta { get; set; }
+
         [Column("observacao")]
         public string Observacao { get; set; }
 

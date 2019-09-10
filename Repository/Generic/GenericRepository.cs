@@ -12,7 +12,7 @@ namespace AppointmentScheduleITIX.Repository.Generic
         protected readonly MsSQLContext _context;
 
 
-        private DbSet<T> _dataset;
+        protected DbSet<T> _dataset;
 
         public GenericRepository(MsSQLContext context)
         {
