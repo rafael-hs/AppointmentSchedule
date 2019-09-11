@@ -19,7 +19,7 @@ namespace AppointmentScheduleITIX.Business.Implementations
             return _repository.Create(patient);
         }
 
-        public void Delete(long id)
+        public void Delete(int id)
         {
             _repository.Delete(id);
         }
@@ -44,9 +44,9 @@ namespace AppointmentScheduleITIX.Business.Implementations
             return _repository.FindByName(name);
         }
 
-        public Patient Update(Patient patient)
+        public Patient Update(Patient patient, int id)
         {
-            return _repository.Update(patient);
+            return _repository.Update(patient, id);
         }
     }
 }

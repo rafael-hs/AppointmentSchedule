@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AppointmentScheduleITIX.Business;
 using AppointmentScheduleITIX.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace AppointmentScheduleITIX.Controllers
         [HttpPost("createpatient")]
         public async Task<IActionResult> CreatePatient([FromBody] Patient patient)
         {
-            if(patient.HoraFim < patient.HoraInicio)
+            if (patient.HoraFim < patient.HoraInicio)
             {
                 return BadRequest("Horário inválido");
             }
@@ -32,7 +33,7 @@ namespace AppointmentScheduleITIX.Controllers
 
             if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
             {
-            return await Task.FromResult(new OkObjectResult(_patientBusiness.Create(patient)));
+                return await Task.FromResult(new OkObjectResult(_patientBusiness.Create(patient)));
 
             }
             else
@@ -59,8 +60,8 @@ namespace AppointmentScheduleITIX.Controllers
             return await Task.FromResult(new OkObjectResult(_patientBusiness.FindByName(name)));
         }
 
-        [HttpPut("updatepatient")]
-        public async Task<IActionResult> UpdatePatient([FromBody] Patient patient)
+        [HttpPut("updatepatient/{id}")]
+        public async Task<IActionResult> UpdatePatient([FromBody] Patient patient, int id)
         {
             if (patient.HoraFim > patient.HoraInicio)
             {
@@ -70,7 +71,7 @@ namespace AppointmentScheduleITIX.Controllers
 
             if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
             {
-                return await Task.FromResult(new OkObjectResult(_patientBusiness.Update(patient)));
+                return await Task.FromResult(new OkObjectResult(_patientBusiness.Update(patient, id)));
             }
             else
             {
@@ -81,8 +82,15 @@ namespace AppointmentScheduleITIX.Controllers
         [HttpDelete("deletepatient/{id}")]
         public async Task<IActionResult> DeletePatient(int id)
         {
-            await Task.Run(() => { _patientBusiness.Delete(id); });
-            return Ok("Excluido com sucesso");
+            try
+            {
+                await Task.Run(() => { _patientBusiness.Delete(id); });
+                return Ok("Excluido com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error ao excluir registro: " + ex);
+            }
         }
     }
 }

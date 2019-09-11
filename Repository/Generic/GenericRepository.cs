@@ -34,7 +34,7 @@ namespace AppointmentScheduleITIX.Repository.Generic
             return item;
         }
 
-        public void Delete(long id)
+        public void Delete(int id)
         {
             var result = _dataset.SingleOrDefault(i => i.Id.Equals(id));
             try
@@ -63,13 +63,13 @@ namespace AppointmentScheduleITIX.Repository.Generic
             return _dataset.SingleOrDefault(i => i.Id.Equals(id));
         }
 
-        public T Update(T item)
+        public T Update(T item, int id)
         {
-            if (!Exists(item.Id)) return null;
+            if (!Exists(id)) return null;
 
             // Pega o estado atual do registro no banco
             // seta as alterações e salva
-            var result = _dataset.SingleOrDefault(b => b.Id == item.Id);
+            var result = _dataset.SingleOrDefault(b => b.Id == id);
             if (result != null)
             {
                 try

@@ -8,8 +8,8 @@ namespace AppointmentScheduleITIX.Repository.Generic
         T Create(T item);
         T FindById(long id);
         List<T> FindAll();
-        T Update(T item);
-        void Delete(long id);
+        T Update(T item, int id);
+        void Delete(int id);
 
         bool Exists(long? id);
     }

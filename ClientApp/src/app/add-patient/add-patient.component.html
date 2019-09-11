@@ -1,0 +1,47 @@
+<div class="col-md-6">
+    <h2 class="text-center">{{patientformlabel}}</h2>
+    <form [formGroup]="addForm" novalidate class="form">
+        <div class="form-group">
+            <label for="patientId">Patient Id:</label>
+            <input type="number" formControlName="id" placeholder="Id" name="patientId" class="form-control"
+                id="patientId">
+        </div>
+
+        <div class="form-group">
+            <label for="patientName">Nome:</label>
+            <input formControlName="patient_name" placeholder="Nome" name="patientName" class="form-control"
+                id="patientNameId">
+            <div class="alert  alert-danger"
+                *ngIf="addForm.get('patient_name').hasError('required') && addForm.get('patient_name').touched">
+                O nome é obrigatório
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="dataNascimento">Data Nascimento:</label>
+            <input formControlName="data_nascimento" placeholder="Data Nascimento" name="dataNascimento"
+                class="form-control" id="dataNascimentoId">
+            <div class="alert  alert-danger"
+                *ngIf="addForm.get('data_nascimento').hasError('required') && addForm.get('data_nascimento').touched">
+                Data Nascimento é obrigatório
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="dataConsulta">Data Consulta:</label>
+            <input formControlName="data_consulta" placeholder="Data Consulta" name="dataConsulta" class="form-control"
+                id="dataConsultaId">
+            <div class="alert  alert-danger"
+                *ngIf="addForm.get('data_consulta').hasError('required') && addForm.get('data_consulta').touched">
+                Data consulta é obrigatório
+            </div>
+        </div>
+
+        <button class="btn btn-success" [disabled]='addForm.invalid' *ngIf="btnvisibility"
+            (click)="onSubmit()">Save</button>
+        <button class="btn btn-success" [disabled]='addForm.invalid' *ngIf="!btnvisibility"
+            (click)="onUpdate()">Update</button>
+
+        <p>Form value: {{ addForm.value | json }}</p>
+    </form>
+</div>

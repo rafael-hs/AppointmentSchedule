@@ -1,37 +1,46 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';  
+import { ReactiveFormsModule } from "@angular/forms";  
+import { FormsModule } from '@angular/forms';
+
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { AppComponent } from './app.component';
-//import { NavMenuComponent } from './nav-menu/nav-menu.component';
-//import { HomeComponent } from './home/home.component';
-//import { CounterComponent } from './counter/counter.component';
-//import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { PatientComponent} from './patient/patient.component';
+import { ListPatientComponent} from './list-patient/list-patient.component';
+import { AddPatientComponent } from './add-patient/add-patient.component'; 
+import { PatientService } from './service/patient.service';   
 
 @NgModule({
   declarations: [
     AppComponent,
-    // NavMenuComponent,
-    // HomeComponent,
-    // CounterComponent,
-    // FetchDataComponent,
-    PatientComponent
+    ListPatientComponent,
+    AddPatientComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
-    RouterModule.forRoot([
-     // { path: '', component: HomeComponent, pathMatch: 'full' },
-     // { path: 'counter', component: CounterComponent },
-      //{ path: 'fetch-data', component: FetchDataComponent },
-      { path: '', component: PatientComponent}
-    ])
+
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
+    Ng2SearchPipeModule
   ],
-  providers: [],
+  providers: [PatientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export class Employee {  
+  id?: number;  
+  employee_name?: string;  
+  employee_salary?: number;  
+  employee_age?: number;  
+} 

@@ -1,0 +1,34 @@
+<h1>Pacientes</h1>
+
+<!--<p *ngIf="!patients"><em>Loading...</em></p>-->
+
+<nav class="navbar navbar-light bg-light">
+    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" [(ngModel)]="searchText" tooltip="É possivel buscar por nome, data e horário">
+</nav>
+
+<table class='table table-hover' *ngIf="patients">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Data Nascimento</th>
+      <th>Data da consulta</th>
+      <th>Horário</th>
+      <th>Observações</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let patient of patients | filter:searchText">
+      <td class="hidden">{{patient.id}}</td>
+      <td>{{ patient.nome }}</td>
+      <td>{{ patient.dataNascimento }}</td>
+      <td>{{ patient.dataConsulta }}</td>
+      <td>{{ patient.horaInicio }} às {{ patient.horaFim }}</td>
+      <td>{{ patient.observacao }}</td>
+      <td><button class="btn btn-danger btn-padrao" tooltip="Desmarcar consulta" (click)="deletePatient(patient)"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-warning btn-padrao" tooltip="Editar consulta" (click)="editPatient(patient)"><i class="fa fa-edit"></i></button></td>
+    </tr>
+  </tbody>
+</table>
+
+<span><button class="btn btn-primary">Marcar consulta</button></span>
