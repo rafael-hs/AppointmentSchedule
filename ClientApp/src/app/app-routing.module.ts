@@ -1,21 +1,17 @@
-import { NgModule } from '@angular/core';  
-import { CommonModule } from '@angular/common';  
-import { RouterModule, Routes } from '@angular/router';  
-import { ListPatientComponent } from './list-patient/list-patient.component';  
-import { AddPatientComponent } from './add-patient/add-patient.component';  
-  
-export const routes: Routes = [  
-  { path: '', component: ListPatientComponent, pathMatch: 'full' },  
-  { path: 'list-patient', component: ListPatientComponent },  
-  { path: 'add-patient', component: AddPatientComponent }  
-];  
-  
-@NgModule({  
-  imports: [  
-    CommonModule,  
-    RouterModule.forRoot(routes)  
-  ],  
-  exports: [RouterModule],  
-  declarations: []  
-})  
-export class AppRoutingModule { }  
+//import { PatientDetailsComponent } from './patient-datails/patient-datails.component';
+import { CreatePatientComponent } from './create-patient/create-patient.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { PatientListComponent } from './patient-list/patient-list.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'patient', pathMatch: 'full' },
+  { path: 'patients', component: PatientListComponent },
+  { path: 'add', component: CreatePatientComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
