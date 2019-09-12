@@ -6,7 +6,7 @@ namespace AppointmentScheduleITIX.Repository.Generic
     public interface IRepository<T> where T : BaseEntity
     {
         T Create(T item);
-        T FindById(long id);
+        T FindById(int id);
         List<T> FindAll();
         T Update(T item, int id);
         void Delete(int id);

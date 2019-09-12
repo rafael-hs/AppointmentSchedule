@@ -9,7 +9,7 @@ namespace AppointmentScheduleITIX.Business
     public interface IPatientBusiness
     {
         Patient Create(Patient patient);
-        Patient FindById(long id);
+        Patient FindById(int id);
         List<Patient> FindAll();
         Patient Update(Patient patient, int id);
         void Delete(int id);

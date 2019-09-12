@@ -34,7 +34,7 @@ namespace AppointmentScheduleITIX.Business.Implementations
             return _repository.FindAll();
         }
 
-        public Patient FindById(long id)
+        public Patient FindById(int id)
         {
             return _repository.FindById(id);
         }

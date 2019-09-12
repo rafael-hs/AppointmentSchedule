@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Patient } from './patient';
 
 
 @Injectable({
@@ -9,23 +10,22 @@ import { Observable } from 'rxjs';
 
 export class PatientService {
 
-  private baseUrl = 'https://localhost:5001/api/schedule/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-  getPatientById(id: number): Observable<object> {
-    return this.http.get(`${this.baseUrl}getpatient/${id}`);
+  getPatientById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}api/schedule/getpatient/${id}`);
   }
   createPatient(patient: Object): Observable<object> {
-    return this.http.post(`${this.baseUrl}createpatient`, patient);
+    return this.http.post(`${this.baseUrl}api/schedule/createpatient`, patient);
   }
   updatePatient(id: number, value: any): Observable<object> {
-    return this.http.put(`${this.baseUrl}updatepatient/${id}`, value) ;
+    return this.http.put(`${this.baseUrl}api/schedule/updatepatient/${id}`, value) ;
   }
   deletePatient(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}deletepatient/${id}`, {responseType: 'text'});
+    return this.http.delete(`${this.baseUrl}api/schedule/deletepatient/${id}`, {responseType: 'text'});
   }
   getPatients(): Observable<any> {
-    return this.http.get(`${this.baseUrl}getall`);
+    return this.http.get(`${this.baseUrl}api/schedule/getall`);
   }
 
 }

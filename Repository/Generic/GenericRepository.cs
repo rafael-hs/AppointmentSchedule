@@ -58,7 +58,7 @@ namespace AppointmentScheduleITIX.Repository.Generic
             return _dataset.ToList();
         }
 
-        public T FindById(long id)
+        public T FindById(int id)
         {
             return _dataset.SingleOrDefault(i => i.Id.Equals(id));
         }

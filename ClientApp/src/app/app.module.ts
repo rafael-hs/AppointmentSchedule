@@ -5,9 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule, } from 'ngx-bootstrap/modal';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -17,6 +16,7 @@ import { AppComponent } from './app.component';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { PatientDatailsComponent } from './patient-datails/patient-datails.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
+import { EditPatientComponent } from './edit-patient/edit-patient.component';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { PatientListComponent } from './patient-list/patient-list.component';
     AppComponent,
     CreatePatientComponent,
     PatientDatailsComponent,
-    PatientListComponent
+    PatientListComponent,
+    EditPatientComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +34,8 @@ import { PatientListComponent } from './patient-list/patient-list.component';
     AppRoutingModule,
     ReactiveFormsModule,
     TextMaskModule,
-    
+
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),

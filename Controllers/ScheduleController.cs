@@ -54,7 +54,7 @@ namespace AppointmentScheduleITIX.Controllers
         }
 
         [HttpGet("getpatient/{id}")]
-        public async Task<IActionResult> GetPatientById(long id)
+        public async Task<IActionResult> GetPatientById(int id)
         {
             return await Task.FromResult(new OkObjectResult(_patientBusiness.FindById(id)));
         }
