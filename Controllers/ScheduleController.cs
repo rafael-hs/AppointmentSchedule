@@ -38,8 +38,6 @@ namespace AppointmentScheduleITIX.Controllers
 
             if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
             {
-                patient.DataNascimento.ToString("YYYY-MM-dd HH:mm:ss.fff");
-                patient.DataConsulta.ToString("YYYY-MM-dd HH:mm:ss.fff");
                 return await Task.FromResult(new OkObjectResult(_patientBusiness.Create(patient)));
 
             }
