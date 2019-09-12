@@ -25,14 +25,21 @@ namespace AppointmentScheduleITIX.Controllers
         [HttpPost("createpatient")]
         public async Task<IActionResult> CreatePatient([FromBody] Patient patient)
         {
+            if (patient == null) return BadRequest("model is null");
+
+            if(patient.HoraFim.Hours == 0 || patient.HoraInicio.Hours == 0)
+            {
+                return BadRequest("Horário inválido");
+            }
             if (patient.HoraFim < patient.HoraInicio)
             {
                 return BadRequest("Horário inválido");
             }
-            if (patient == null) return BadRequest("model is null");
 
             if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
             {
+                patient.DataNascimento.ToString("YYYY-MM-dd HH:mm:ss.fff");
+                patient.DataConsulta.ToString("YYYY-MM-dd HH:mm:ss.fff");
                 return await Task.FromResult(new OkObjectResult(_patientBusiness.Create(patient)));
 
             }

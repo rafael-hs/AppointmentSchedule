@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class PatientService {
 
-  private baseUrl = '/api/v1/employees';
+  private baseUrl = 'https://localhost:5001/api/schedule/';
   constructor(private http: HttpClient) { }
 
   getPatientById(id: number): Observable<object> {

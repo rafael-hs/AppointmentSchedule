@@ -19,7 +19,9 @@ export class PatientListComponent implements OnInit {
   }
 
   reloadData() {
-    this.patients = this.patientService.getPatients();
+    this.patientService.getPatients().subscribe(res => {
+      this.patients = res
+    });
   }
 
   deletePatient(id: number) {

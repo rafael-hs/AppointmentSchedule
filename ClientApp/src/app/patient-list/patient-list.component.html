@@ -8,7 +8,7 @@
   <nav class="navbar navbar-light bg-light">
     <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" [(ngModel)]="searchText"
       tooltip="É possivel buscar por nome, data e horário">
-      <span><button class="btn btn-primary">Marcar consulta</button></span>
+      <!-- <span><button class="btn btn-primary">Marcar consulta</button></span> -->
   </nav>
   <div class="panel-body">
     <table class='table table-hover' *ngIf="patients">
@@ -26,12 +26,12 @@
         <tr *ngFor="let patient of patients | filter:searchText">
           <td class="hidden">{{patient.id}}</td>
           <td>{{ patient.nome }}</td>
-          <td>{{ patient.dataNascimento }}</td>
-          <td>{{ patient.dataConsulta }}</td>
+          <td class="formatarData">{{ patient.dataNascimento }}</td>
+          <td class="formatarData">{{ patient.dataConsulta }}</td>
           <td>{{ patient.horaInicio }} às {{ patient.horaFim }}</td>
           <td>{{ patient.observacao }}</td>
           <td><button class="btn btn-danger btn-padrao" tooltip="Desmarcar consulta" (click)="deletePatient(patient.id)"><i
-                class="fa fa-trash"></i></button>
+                class="fa fa-trash" style="color:black"></i></button> <hr>
             <button class="btn btn-warning btn-padrao" tooltip="Editar consulta" (click)="editPatient(patient)"><i
                 class="fa fa-edit"></i></button></td>
         </tr>

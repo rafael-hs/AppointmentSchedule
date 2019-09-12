@@ -1,8 +1,8 @@
 export class Patient {
   id: number;
   nome: string;
-  dataNascimento: Date;
-  dataConsulta: Date;
+  dataNascimento: string;
+  dataConsulta: string;
   horaInicio: Date;
   horaFim: Date;
   observacao: string;
