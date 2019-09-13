@@ -3,7 +3,7 @@
 ## Tecnologias
 	-Dotnet core 2.2 Backend 
 	-Angular 6 frontEnd 
-	-Evolve para migrations 
+	-Evolve para migrations (acabou que vi que o evolve não é capaz de criar bancos no sql server, por isso peço a criação manual)
 	-Nunit para testes de unidade 
 
 ## Comandos para executar a App 
