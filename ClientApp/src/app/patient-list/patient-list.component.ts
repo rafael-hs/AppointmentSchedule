@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, Input } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PatientService } from './../patient.service';
 import { Patient } from './../patient';
@@ -11,11 +11,12 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 })
 export class PatientListComponent implements OnInit {
   patients: Observable<Patient[]>;
-  earchText;
+  searchText;
   modalRef: any;
   dataNascimentoEdit: Date;
   dataConsultaEdit: Date;
-  @Input() patientEdit: Patient;
+
+  patientEdit: Patient;
 
   constructor(private patientService: PatientService, private modalService: BsModalService) { }
 
@@ -26,26 +27,47 @@ export class PatientListComponent implements OnInit {
   getPatient(id: number) {
     this.patientService.getPatientById(id).subscribe(res => {
       this.patientEdit = res;
+      console.log(res)
       this.dataNascimentoEdit = new Date(this.patientEdit.dataNascimento);
       this.dataConsultaEdit = new Date(this.patientEdit.dataConsulta);
     });
   }
 
+
+
   ngOnInit() {
-    this.reloadData();
+    this.reloadData()
   }
 
-  dataFormate = function convertDate(dateString) {
-    const p = dateString.split(/\D/g);
-    return [p[2], p[1], p[0]].join('/');
-  };
-
+  reloadDataWDelay(patientService) {
+    setTimeout(function () {
+      console.log("entrou")
+      patientService.getPatients().subscribe(res => {
+        this.patients = res;
+        console.log("saiu")
+      });
+    }, 2000)
+  }
 
   reloadData() {
     this.patientService.getPatients().subscribe(res => {
       this.patients = res;
     });
   }
+
+  mask = function (rawValue) {
+    return [/\d/, /\d/, ':', /\d/, /\d/];
+  };
+
+  dataFormate = function convertDate(dateString) {
+    const p = dateString.split(/\D/g);
+    return [p[2], p[1], p[0]].join('/');
+  };
+
+  timeFormate = function convertDate(timeString) {
+    const p = timeString.split(/\D/g);
+    return [p[0], p[1]].join(':');
+  };
 
   deletePatient(id: number) {
     this.patientService.deletePatient(id)
@@ -55,6 +77,38 @@ export class PatientListComponent implements OnInit {
           this.reloadData();
         },
         error => console.log(error));
+  }
+
+  onSubmit() {
+    this.save();
+    this.modalRef.hide();
+  }
+
+  save() {
+    this.patientEdit.dataNascimento = this.conversorDeData(this.dataNascimentoEdit);
+    this.patientEdit.dataConsulta = this.conversorDeData(this.dataNascimentoEdit);
+    console.log(this.patientEdit)
+    this.patientService.updatePatient(this.patientEdit)
+      .subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  conversorDeData(data: Date) {
+    function pad(number, length) {
+
+      let str = '' + number;
+      while (str.length < length) {
+        str = '0' + str;
+      }
+      return str;
+    }
+    const dataString = data.getFullYear()
+      + '-' + pad(data.getMonth() + 1, 2)
+      + '-' + pad(data.getDate(), 2)
+      + ' ' + pad(data.getHours(), 2)
+      + ':' + pad(data.getMinutes(), 2)
+      + ':' + pad(data.getSeconds(), 2);
+
+    return dataString;
   }
 
 }

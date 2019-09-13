@@ -57,7 +57,7 @@ export class CreatePatientComponent implements OnInit {
       return str;
     }
     const dataString = data.getFullYear()
-      + '-' + pad(data.getMonth(), 2)
+      + '-' + pad(data.getMonth()+1, 2)
       + '-' + pad(data.getDate(), 2)
       + ' ' + pad(data.getHours(), 2)
       + ':' + pad(data.getMinutes(), 2)

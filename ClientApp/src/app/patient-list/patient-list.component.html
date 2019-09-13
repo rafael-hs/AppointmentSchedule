@@ -1,19 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h1>Pacientes</h1>
+    <h1>Consultas</h1>
   </div>
-
-  <!--<p *ngIf="!patients"><em>Loading...</em></p>-->
 
   <nav class="navbar navbar-light bg-light">
     <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" [(ngModel)]="searchText"
-      tooltip="É possivel buscar por nome, data e horário">
-      <!-- <span><button class="btn btn-primary">Marcar consulta</button></span> -->
+      tooltip="É possivel buscar por nome e horário">
   </nav>
   <div class="panel-body">
-    <table class='table table-hover' *ngIf="patients">
+    <table class='table table-hover' *ngIf="patients" ng-change="reloadData()"> 
       <thead>
         <tr>
+          <th>Id</th>
           <th>Nome</th>
           <th>Data Nascimento</th>
           <th>Data da consulta</th>
@@ -23,76 +21,75 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let patient of patients | filter:searchText">
+        <tr *ngFor="let patient of patients | filter:earchText">
           <td class="hidden">{{patient.id}}</td>
           <td>{{ patient.nome }}</td>
           <td class="formatarData">{{ dataFormate(patient.dataNascimento) }}</td>
           <td class="formatarData">{{ dataFormate(patient.dataConsulta) }}</td>
-          <td>{{ patient.horaInicio }} às {{ patient.horaFim }}</td>
+          <td>{{ timeFormate(patient.horaInicio) }} às {{ timeFormate(patient.horaFim) }}</td>
           <td>{{ patient.observacao }}</td>
-          <td><button class="btn btn-danger btn-padrao" tooltip="Desmarcar consulta" (click)="deletePatient(patient.id)"><i
-                class="fa fa-trash" style="color:black"></i></button> <hr>
-            <button class="btn btn-warning btn-padrao" tooltip="Editar consulta" (click)="openModal(template); getPatient(patient.id)"><i
-                class="fa fa-edit"></i></button></td>
+          <td>
+            <button class="btn btn-outline-warning btn-padrao" tooltip="Editar consulta"
+              (click)="openModal(template); getPatient(patient.id)"><i class="fa fa-edit"
+                style="color:black"></i></button>
+            <button class="btn btn-outline-danger btn-padrao" tooltip="Desmarcar consulta"
+              (click)="deletePatient(patient.id)"><i class="fa fa-trash" style="color:black"></i></button>
+          </td>
         </tr>
       </tbody>
     </table>
     <ng-template #template>
       <div class="modal-header">
-          <h4 class="modal-title pull-left">Editar Consulta</h4>
-          <button type="button" class="close pull-right"
-                  aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title pull-left">Editar Consulta</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="patientEdit">
+        <div>
           <div>
+            <form (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <label for="Id">Id: </label>
-                <span id="" required [(ngModel)]="patientEdit.id" name="Id"></span>
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" required [(ngModel)]="patientEdit.nome" name="nome">
               </div>
-              <div [hidden]="submitted" style="width: 400px;">
-                <form (ngSubmit)="onSubmit()">
 
-                  <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" required [(ngModel)]="patientEdit.nome" name="nome">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="dataNascimento">Data Nascimento:</label>
-                    <input type="text" class="form-control" id="dataNascimento" required [(ngModel)]="dataNascimentoEdit"
-                      autocomplete="off" name="dataNascimento" placeholder="Data" bsDatepicker
-                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="dataConsulta">Data da consulta:</label>
-                    <input type="text" class="form-control" id="dataConsulta" required [(ngModel)]="dataConsultaEdit" autocomplete="off"
-                      name="dataConsulta" placeholder="Data" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="horaInicio">Horário do inicio da consulta:</label>
-                    <input class="form-control" name="horaInicio" [(ngModel)]="patientEdit.horaInicio" [textMask]="{mask: mask}">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="horaFim">Horário do fim da consulta:</label>
-                    <input class="form-control" name="horaFim" [(ngModel)]="patientEdit.horaFim" [textMask]="{mask: mask}">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="observacao">Observações:</label>
-                    <textarea class="form-control" id="observacao" required [(ngModel)]="patientEdit.observacao"
-                      name="observacao"></textarea>
-                  </div>
-
-                  <button type="submit" class="btn btn-success">Salvar</button>
-                </form>
+              <div class="form-group">
+                <label for="dataNascimento">Data Nascimento:</label>
+                <input type="text" class="form-control" id="dataNascimento" required [(ngModel)]="dataNascimentoEdit"
+                  autocomplete="off" name="dataNascimento" placeholder="Data" bsDatepicker
+                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               </div>
-            </div>
+
+              <div class="form-group">
+                <label for="dataConsulta">Data da consulta:</label>
+                <input type="text" class="form-control" id="dataConsulta" required [(ngModel)]="dataConsultaEdit"
+                  autocomplete="off" name="dataConsulta" placeholder="Data" bsDatepicker
+                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+              </div>
+
+              <div class="form-group">
+                <label for="horaInicio">Horário do inicio da consulta:</label>
+                <input class="form-control" name="horaInicio" [(ngModel)]="patientEdit.horaInicio"
+                  [textMask]="{mask: mask}">
+              </div>
+
+              <div class="form-group">
+                <label for="horaFim">Horário do fim da consulta:</label>
+                <input class="form-control" name="horaFim" [(ngModel)]="patientEdit.horaFim" [textMask]="{mask: mask}">
+              </div>
+
+              <div class="form-group">
+                <label for="observacao">Observações:</label>
+                <textarea class="form-control" id="observacao" required [(ngModel)]="patientEdit.observacao"
+                  name="observacao"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-success" (click)="reloadDataWDelay(patientService)">Salvar</button>
+            </form>
+          </div>
+        </div>
       </div>
-  </ng-template>
+    </ng-template>
   </div>
 </div>

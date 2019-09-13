@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { PatientDatailsComponent } from './patient-datails/patient-datails.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
-import { EditPatientComponent } from './edit-patient/edit-patient.component';
 
 
 @NgModule({
@@ -24,8 +23,7 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
     AppComponent,
     CreatePatientComponent,
     PatientDatailsComponent,
-    PatientListComponent,
-    EditPatientComponent
+    PatientListComponent
   ],
   imports: [
     BrowserModule,
