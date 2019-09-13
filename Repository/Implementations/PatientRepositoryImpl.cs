@@ -17,14 +17,18 @@ namespace AppointmentScheduleITIX.Repository.Implementations
             try
             {
                 string dataConsultaFormatada = dataConsulta.ToString("yyyy-MM-dd");
-                string sql = $"select * from patients where data_consulta = '{dataConsultaFormatada}' and hora_inicio = '{horaInicio}' and hora_fim = '{horaFim}'";
 
-                var result = _dataset.FromSql(sql).ToList();
-                if(result[0].Id == id)
+                var result = _dataset.SingleOrDefault(i => i.DataConsulta == dataConsulta && i.HoraInicio == horaInicio && i.HoraFim == horaFim);
+
+                if(result == null)
                 {
                     return false;
                 }
-                if (result.Count >=1)
+                if(result.Id == id)
+                {
+                    return false;
+                }
+                if (result != null)
                 {
                     return true;
                 }

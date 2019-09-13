@@ -13,9 +13,9 @@ export class PatientListComponent implements OnInit {
   patients: Observable<Patient[]>;
   searchText;
   modalRef: any;
+
   dataNascimentoEdit: Date;
   dataConsultaEdit: Date;
-
   patientEdit: Patient;
 
   constructor(private patientService: PatientService, private modalService: BsModalService) { }
@@ -33,20 +33,23 @@ export class PatientListComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit() {
-    this.reloadData()
+    this.reloadData();
   }
 
-  reloadDataWDelay(patientService) {
-    setTimeout(function () {
-      console.log("entrou")
-      patientService.getPatients().subscribe(res => {
+  async reloadDataWDelay() {
+    await this.delay(500);
+      this.patientService.getPatients().subscribe(res => {
         this.patients = res;
-        console.log("saiu")
       });
-    }, 2000)
+  }
+
+  private delay(ms: number): Promise<boolean> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(true);
+      }, ms);
+    });
   }
 
   reloadData() {
@@ -86,8 +89,8 @@ export class PatientListComponent implements OnInit {
 
   save() {
     this.patientEdit.dataNascimento = this.conversorDeData(this.dataNascimentoEdit);
-    this.patientEdit.dataConsulta = this.conversorDeData(this.dataNascimentoEdit);
-    console.log(this.patientEdit)
+    this.patientEdit.dataConsulta = this.conversorDeData(this.dataConsultaEdit);
+    console.log(this.patientEdit);
     this.patientService.updatePatient(this.patientEdit)
       .subscribe(data => console.log(data), error => console.log(error));
   }

@@ -5,10 +5,10 @@
 
   <nav class="navbar navbar-light bg-light">
     <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" [(ngModel)]="searchText"
-      tooltip="É possivel buscar por nome e horário">
+      tooltip="Filtrar por nome">
   </nav>
   <div class="panel-body">
-    <table class='table table-hover' *ngIf="patients" ng-change="reloadData()"> 
+    <table class='table table-hover' *ngIf="patients">
       <thead>
         <tr>
           <th>Id</th>
@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let patient of patients | filter:earchText">
+        <tr *ngFor="let patient of patients | filter:searchText">
           <td class="hidden">{{patient.id}}</td>
           <td>{{ patient.nome }}</td>
           <td class="formatarData">{{ dataFormate(patient.dataNascimento) }}</td>
@@ -85,7 +85,7 @@
                   name="observacao"></textarea>
               </div>
 
-              <button type="submit" class="btn btn-success" (click)="reloadDataWDelay(patientService)">Salvar</button>
+              <button type="submit" class="btn btn-success" (click)="reloadDataWDelay()">Salvar</button>
             </form>
           </div>
         </div>

@@ -19,7 +19,7 @@ export class PatientService {
     return this.http.post(`${this.baseUrl}api/schedule/createpatient`, patient);
   }
   updatePatient(patient: Object): Observable<object> {
-    console.log(patient + "dentro do service")
+    console.log(patient + " dentro do service")
     return this.http.put<Patient>(`${this.baseUrl}api/schedule/updatepatient`, patient) ;
   }
   deletePatient(id: number): Observable<any> {
