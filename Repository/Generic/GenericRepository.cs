@@ -48,7 +48,7 @@ namespace AppointmentScheduleITIX.Repository.Generic
             }
         }
 
-        public bool Exists(long? id)
+        public bool Exists(int id)
         {
             return _dataset.Any(b => b.Id.Equals(id));
         }
@@ -63,13 +63,13 @@ namespace AppointmentScheduleITIX.Repository.Generic
             return _dataset.SingleOrDefault(i => i.Id.Equals(id));
         }
 
-        public T Update(T item, int id)
+        public T Update(T item)
         {
-            if (!Exists(id)) return null;
+            if (!Exists(item.Id)) return null;
 
             // Pega o estado atual do registro no banco
             // seta as alterações e salva
-            var result = _dataset.SingleOrDefault(b => b.Id == id);
+            var result = _dataset.SingleOrDefault(b => b.Id == item.Id);
             if (result != null)
             {
                 try

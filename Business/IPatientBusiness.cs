@@ -11,10 +11,10 @@ namespace AppointmentScheduleITIX.Business
         Patient Create(Patient patient);
         Patient FindById(int id);
         List<Patient> FindAll();
-        Patient Update(Patient patient, int id);
+        Patient Update(Patient patient);
         void Delete(int id);
         IEnumerable<Patient> FindByName(string name);
 
-        bool ExistsDate(DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim);
+        bool ExistsDate(int id, DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim);
     }
 }

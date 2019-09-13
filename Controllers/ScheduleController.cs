@@ -27,16 +27,16 @@ namespace AppointmentScheduleITIX.Controllers
         {
             if (patient == null) return BadRequest("model is null");
 
-            if(patient.HoraFim.Hours == 0 || patient.HoraInicio.Hours == 0)
+            if (patient.HoraFim.Hours == 0 || patient.HoraInicio.Hours == 0)
             {
                 return BadRequest("Horário inválido");
             }
-            if (patient.HoraFim < patient.HoraInicio)
+            if (patient.HoraFim.Hours < patient.HoraInicio.Hours)
             {
                 return BadRequest("Horário inválido");
             }
 
-            if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
+            if (!_patientBusiness.ExistsDate(patient.Id,patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
             {
                 return await Task.FromResult(new OkObjectResult(_patientBusiness.Create(patient)));
 
@@ -50,33 +50,57 @@ namespace AppointmentScheduleITIX.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
-            return await Task.FromResult(new OkObjectResult(_patientBusiness.FindAll()));
+            try
+            {
+                return await Task.FromResult(new OkObjectResult(_patientBusiness.FindAll()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Erro ao buscar as consultas, ERROR: " + ex);
+            }
         }
 
         [HttpGet("getpatient/{id}")]
         public async Task<IActionResult> GetPatientById(int id)
         {
-            return await Task.FromResult(new OkObjectResult(_patientBusiness.FindById(id)));
+            try
+            {
+                return await Task.FromResult(new OkObjectResult(_patientBusiness.FindById(id)));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Erro ao buscar a consulta, ERROR: " + ex);
+            }
         }
 
         [HttpGet("getpatients/{name}")]
         public async Task<IActionResult> GetPatientByName(string name)
         {
-            return await Task.FromResult(new OkObjectResult(_patientBusiness.FindByName(name)));
+            try
+            {
+                return await Task.FromResult(new OkObjectResult(_patientBusiness.FindByName(name)));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Erro ao buscar a consulta, ERROR: " + ex);
+            }
         }
 
-        [HttpPut("updatepatient/{id}")]
-        public async Task<IActionResult> UpdatePatient([FromBody] Patient patient, int id)
+        [HttpPut("updatepatient")]
+        public async Task<IActionResult> UpdatePatient([FromBody]Patient patient)
         {
-            if (patient.HoraFim > patient.HoraInicio)
+            if (patient == null) return BadRequest("model is null");
+
+            if (patient.HoraFim < patient.HoraInicio)
             {
                 return BadRequest("Horário inválido");
             }
-            if (patient == null) return BadRequest("model is null");
 
-            if (!_patientBusiness.ExistsDate(patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
+            if (!_patientBusiness.ExistsDate(patient.Id,patient.DataConsulta, patient.HoraInicio, patient.HoraFim))
             {
-                return await Task.FromResult(new OkObjectResult(_patientBusiness.Update(patient, id)));
+                return await Task.FromResult(new OkObjectResult(_patientBusiness.Update(patient)));
             }
             else
             {

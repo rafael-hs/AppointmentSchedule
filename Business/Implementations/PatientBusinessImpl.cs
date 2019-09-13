@@ -24,9 +24,9 @@ namespace AppointmentScheduleITIX.Business.Implementations
             _repository.Delete(id);
         }
 
-        public bool ExistsDate(DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim)
+        public bool ExistsDate(int id, DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim)
         {
-            return _repository.ExistsDate(dataInicio, horaInicio, horaFim);
+            return _repository.ExistsDate(id,dataInicio, horaInicio, horaFim);
         }
 
         public List<Patient> FindAll()
@@ -44,9 +44,9 @@ namespace AppointmentScheduleITIX.Business.Implementations
             return _repository.FindByName(name);
         }
 
-        public Patient Update(Patient patient, int id)
+        public Patient Update(Patient patient)
         {
-            return _repository.Update(patient, id);
+            return _repository.Update(patient);
         }
     }
 }

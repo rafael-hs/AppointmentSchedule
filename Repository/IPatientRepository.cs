@@ -9,6 +9,6 @@ namespace AppointmentScheduleITIX.Repository
     {
         IEnumerable<Patient> FindByName(string name);
 
-        bool ExistsDate(DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim);
+        bool ExistsDate(int id, DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim);
     }
 }
