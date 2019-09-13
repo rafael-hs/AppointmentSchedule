@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AppointmentScheduleITIX.Business;
-using AppointmentScheduleITIX.Model;
+using AppointmentScheduleITIX.Backend.Business;
+using AppointmentScheduleITIX.Backend.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppointmentScheduleITIX.Controllers
@@ -16,7 +16,6 @@ namespace AppointmentScheduleITIX.Controllers
             _patientBusiness = patientBusiness;
         }
 
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();

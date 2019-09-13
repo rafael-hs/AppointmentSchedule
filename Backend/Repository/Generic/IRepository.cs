@@ -1,7 +1,7 @@
-﻿using AppointmentScheduleITIX.Model.Base;
+﻿using AppointmentScheduleITIX.Backend.Model.Base;
 using System.Collections.Generic;
 
-namespace AppointmentScheduleITIX.Repository.Generic
+namespace AppointmentScheduleITIX.Backend.Repository.Generic
 {
     public interface IRepository<T> where T : BaseEntity
     {

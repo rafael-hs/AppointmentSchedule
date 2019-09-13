@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace AppointmentScheduleITIX.Model.Context
+namespace AppointmentScheduleITIX.Backend.Model.Context
 {
     public class MsSQLContext : DbContext
     {

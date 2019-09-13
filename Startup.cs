@@ -1,4 +1,3 @@
-using AppointmentScheduleITIX.Model.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Data.SqlClient;
-using AppointmentScheduleITIX.Business;
-using AppointmentScheduleITIX.Business.Implementations;
-using AppointmentScheduleITIX.Repository;
-using AppointmentScheduleITIX.Repository.Implementations;
-using AppointmentScheduleITIX.Repository.Generic;
+using AppointmentScheduleITIX.Backend.Repository;
+using AppointmentScheduleITIX.Backend.Business.Implementations;
+using AppointmentScheduleITIX.Backend.Business;
+using AppointmentScheduleITIX.Backend.Repository.Implementations;
+using AppointmentScheduleITIX.Backend.Repository.Generic;
+using AppointmentScheduleITIX.Backend.Model.Context;
 
 namespace AppointmentScheduleITIX
 {
@@ -44,7 +44,7 @@ namespace AppointmentScheduleITIX
                     var evolveConnection = new SqlConnection(connectionString);
                     var evolve = new Evolve.Evolve(evolveConnection, msg => _logger.LogInformation(msg))
                     {
-                        Locations = new[] { "db/migrations" },
+                        Locations = new[] { "Backend/db/migrations" },
                         IsEraseDisabled = true,
                     };
 

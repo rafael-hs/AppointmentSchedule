@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AppointmentScheduleITIX.Model.Base
+namespace AppointmentScheduleITIX.Backend.Model.Base
 {
     public class BaseEntity
     {

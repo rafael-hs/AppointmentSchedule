@@ -1,12 +1,12 @@
-﻿using AppointmentScheduleITIX.Model;
-using AppointmentScheduleITIX.Model.Context;
-using AppointmentScheduleITIX.Repository.Generic;
+﻿using AppointmentScheduleITIX.Backend.Model;
+using AppointmentScheduleITIX.Backend.Model.Context;
+using AppointmentScheduleITIX.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AppointmentScheduleITIX.Repository.Implementations
+namespace AppointmentScheduleITIX.Backend.Repository.Implementations
 {
     public class PatientRepositoryImpl : GenericRepository<Patient>, IPatientRepository
     {

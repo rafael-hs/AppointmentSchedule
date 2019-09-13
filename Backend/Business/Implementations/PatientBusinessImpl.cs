@@ -1,9 +1,9 @@
-﻿using System;
+﻿using AppointmentScheduleITIX.Backend.Repository;
+using AppointmentScheduleITIX.Backend.Model;
+using System;
 using System.Collections.Generic;
-using AppointmentScheduleITIX.Model;
-using AppointmentScheduleITIX.Repository;
 
-namespace AppointmentScheduleITIX.Business.Implementations
+namespace AppointmentScheduleITIX.Backend.Business.Implementations
 {
     public class PatientBusinessImpl : IPatientBusiness
     {

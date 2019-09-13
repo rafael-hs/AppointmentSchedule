@@ -1,8 +1,8 @@
-﻿using AppointmentScheduleITIX.Model.Base;
+﻿using AppointmentScheduleITIX.Backend.Model.Base;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AppointmentScheduleITIX.Model
+namespace AppointmentScheduleITIX.Backend.Model
 {
     [Table("patients")]
     public class Patient : BaseEntity

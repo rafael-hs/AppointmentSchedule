@@ -1,9 +1,9 @@
-﻿using AppointmentScheduleITIX.Model;
-using AppointmentScheduleITIX.Repository.Generic;
+﻿using AppointmentScheduleITIX.Backend.Model;
+using AppointmentScheduleITIX.Backend.Repository.Generic;
 using System;
 using System.Collections.Generic;
 
-namespace AppointmentScheduleITIX.Repository
+namespace AppointmentScheduleITIX.Backend.Repository
 {
     public interface IPatientRepository : IRepository<Patient>
     {
