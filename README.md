@@ -20,11 +20,11 @@
 		
 ## Algumas imagens da App
 ### Tela Inicial
-![alt text](./ClientApp/src/assets/telaInicio.png) 
+![alt text](./AppointmentSchedule/ClientApp/src/assets/telaInicio.png) 
 	
 	
 ### Cadastro
-![alt text](./ClientApp/src/assets/telaInicio2.png)
+![alt text](./AppointmentSchedule/ClientApp/src/assets/telaInicio2.png)
 	
 ### Alteração
-![alt text](./ClientApp/src/assets/telaInicio3.png)
+![alt text](./AppointmentSchedule/ClientApp/src/assets/telaInicio3.png)
