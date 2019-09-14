@@ -7,7 +7,7 @@
 	-Xunit para testes de unidade 
 
 ## Comandos para executar a App 
-	- 'npm i' dentro do diretório ClientApp para baixar as dependências <br />
+	- 'npm i' dentro do diretório '\AppointmentSchedule\ClientApp' para baixar as dependências <br />
 	- Criar banco de dados (sugestão = appointment_schedule) e indicar o banco, no appSettings.json, Ex:
 		- "MsSqlConnection":
 		   "MsSqlConnectionString": "Server=Maquina\\SQLEXPRESS;Database=appointment_schedule;User Id=user\\joao.carmo;Password=2134;Trusted_Connection=true;" 
