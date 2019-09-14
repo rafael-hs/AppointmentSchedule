@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentScheduleITIX", "AppointmentScheduleITIX.csproj", "{680486D5-B468-4522-AA99-BB24E4292188}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentTest", "..\AppointmentTest\AppointmentTest.csproj", "{F0C749DF-961F-432E-9157-A53EEE23D8D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{680486D5-B468-4522-AA99-BB24E4292188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{680486D5-B468-4522-AA99-BB24E4292188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{680486D5-B468-4522-AA99-BB24E4292188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0C749DF-961F-432E-9157-A53EEE23D8D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0C749DF-961F-432E-9157-A53EEE23D8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0C749DF-961F-432E-9157-A53EEE23D8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0C749DF-961F-432E-9157-A53EEE23D8D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

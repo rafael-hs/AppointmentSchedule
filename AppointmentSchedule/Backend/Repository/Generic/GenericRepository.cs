@@ -67,8 +67,6 @@ namespace AppointmentScheduleITIX.Backend.Repository.Generic
         {
             if (!Exists(item.Id)) return null;
 
-            // Pega o estado atual do registro no banco
-            // seta as alterações e salva
             var result = _dataset.SingleOrDefault(b => b.Id == item.Id);
             if (result != null)
             {
